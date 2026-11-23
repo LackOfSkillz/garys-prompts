@@ -998,3 +998,277 @@ Do not ignore modules because the repository is too large to fit in a single con
 - Batches pending:
 - Module/feature/interface inventory paths:
 - Docs created/updated:
+- Validation executed (with results):
+- Validation not run (with reasons):
+- Spec/code mismatches:
+- Sensitive-content issues (redacted summary only):
+- Next exact batch and acceptance criteria:
+```
+
+---
+
+## 20. IMPLEMENTATION-READY DOCUMENT TEMPLATES
+
+### 20.1 Module reference template
+
+Use or adapt this skeleton for significant modules:
+
+```markdown
+# <Module name>
+
+> Status: IMPLEMENTED / PARTIAL / DEPRECATED / DISABLED / UNKNOWN
+> Source: <path(s) and major symbols>
+> Verified against: <commit/ref or explain unavailable>
+
+## Purpose and responsibilities
+## Non-responsibilities and boundaries
+## Design rationale and spec/ADR links
+## Source files and key symbols
+## Callers, consumers and dependencies
+## Initialization, startup, shutdown and ownership
+## Public/exported API and critical internal contracts
+## Data models and transformations
+## Execution paths and state transitions
+## Configuration and environment dependencies
+## Authorization, trust and sensitive data
+## Error conditions, retries, timeouts and fallback
+## Logging, metrics, traces and audit events
+## Performance/concurrency/resource assumptions
+## Deployment and operational behavior
+## Troubleshooting, recovery and rollback
+## Tests and reproduction commands
+## Extension points and compatibility hazards
+## Known limits, discrepancies and open risks
+## Related features, contracts, architecture and tasks
+## Evidence register
+```
+
+### 20.2 Feature reference template
+
+```markdown
+# <Feature name> (FEAT-...)
+
+> Status: IMPLEMENTED / PARTIAL / PLANNED_ONLY / DEPRECATED / DISABLED
+> Verified against: <commit/ref>
+
+## Outcome / actor / prerequisites
+## Entry points and permissions
+## Configuration and availability
+## End-to-end user or operator journey
+## Detailed system sequence and source references
+## Inputs, outputs, validation and side effects
+## Persistence, state transitions and integration contracts
+## Success, error, timeout, retry and fallback cases
+## Security, privacy, logging and audit behavior
+## UI states/accessibility if applicable
+## Tests / acceptance scenarios and real execution results
+## Operational troubleshooting
+## Compatibility and release considerations
+## Known limitations and implementation gaps
+## Traceability / evidence
+```
+
+### 20.3 ADR template
+
+```markdown
+# ADR-XXXX: <Decision title>
+- Status: PROPOSED / ACCEPTED / SUPERSEDED / REJECTED
+- Date: <known date or omitted>
+- Context and problem
+- Decision and why
+- Alternatives considered
+- Tradeoffs and risks
+- Security / reliability / operational consequences
+- Impacted source and docs
+- Evidence / links to spec and implementation
+- Conditions requiring reconsideration
+```
+
+### 20.4 Runbook template
+
+```markdown
+# <Runbook name>
+- Service, environment, impact and required permissions
+- Trigger / detection / alerts
+- Safety warnings, preflight checks and escalation boundary
+- Evidence capture / diagnosis (read-only first)
+- Step-by-step remediation (explicit side effects)
+- Validation and recovery / rollback
+- Risks, known limits, version/environment differences
+- Source, dashboards and contacts (approved references only)
+```
+
+### 20.5 Integration reference template
+
+```markdown
+# <Integration name>
+- Purpose and ownership boundaries
+- Contract source / version and vendor dependencies
+- Authentication and permission scope (not credentials)
+- Connectivity and required configuration (sanitized)
+- Requests/events/data mapping and type/unit semantics
+- Error handling, retries, timeouts, rate limits and idempotency
+- Audit/monitoring, data retention and security implications
+- Setup, sandbox validation and known environment differences
+- Operational failure modes and safe recovery
+- Tests / mock behavior / compatibility and upgrade warnings
+- Source links and unresolved gaps
+```
+
+---
+
+## 21. VALIDATION PLAN (RUN WHAT IS SAFE AND AVAILABLE)
+
+You must validate the documentation itself, not merely produce it.
+
+### Structural checks
+
+- Confirm all required pages exist and have useful sections.
+- Confirm indexes link to all module, feature, contract and operator pages.
+- Confirm internal relative links and anchors resolve.
+- Confirm referenced source files and symbol names exist at audited revision.
+- Detect duplicate pages covering the same canonical behavior with conflicting claims.
+- Detect orphan documentation and undocumented new first-party source.
+
+### Technical checks
+
+- Confirm API/CLI examples, settings, types and defaults against actual parser/schema/route code.
+- Reconcile generated schemas with implementation and tests.
+- Check migration order and reversibility claims against migration source.
+- Verify at least one end-to-end walkthrough for every critical user/operational journey.
+- Validate relevant code snippets and structured examples when runnable and safe.
+- Check critical docs against security and operations reviewers' criteria.
+
+### Build and syntax checks
+
+- Execute repository-approved docs lint/build, link checker and Mermaid validation where available.
+- Run safe applicable test commands only in approved non-production environment.
+- If no checks exist, perform explicit manual reviews and propose automation as a separate follow-up item.
+- Capture PASS/FAIL/NOT RUN/NOT APPLICABLE per check, command, scope and reason.
+
+### Freshness and source checks
+
+- Verify implementation state for items marked completed in spec/task backlog.
+- Identify stale screenshots, deprecated flags, old route names, renamed modules, dead links and outdated dependency versions.
+- Validate upstream vendor documentation links when tools permit; otherwise distinguish unverified external claims.
+- Ensure diagrams mirror code/deployment configuration, not historical design expectations.
+
+---
+
+## 22. REVIEW AND STOP CONDITIONS
+
+### Hard-stop / block conditions
+
+Stop the affected action (not unrelated safe documentation) when:
+
+- Access or source visibility is insufficient to verify a key technical claim.
+- Running a test or command could damage a live environment or expose sensitive information.
+- There is evidence of an unresolved security-critical doc leak.
+- The requested documentation would disclose restricted infrastructure or protected information.
+- A critical contract's implementation is inconsistent or unclear and cannot be reliably described.
+- An operation requires write access or approval that is not available.
+
+In those cases, write a clear blocker and safe alternatives. Continue any independent read-only/documentation-only work that remains reliable.
+
+### Never do these things
+
+- Do not mark the work complete after only listing filenames or summarizing README.
+- Do not write a generic document for a module without reading its important code paths.
+- Do not imply future plans are already implemented.
+- Do not copy generic architecture diagrams with invented interconnections.
+- Do not paper over a failing test or nonexistent coverage with confident language.
+- Do not paste real secrets or confidential topology into docs.
+- Do not invent vendor API promises or unsupported standards compliance.
+- Do not overload documentation with low-value line-by-line paraphrase when understanding requires contracts, invariants and data flow.
+- Do not silently delete existing human-authored docs or remove documented user workflows.
+- Do not claim the entire repository is documented while any module batch is pending.
+- Do not perform destructive commands to "verify" an operational procedure.
+
+---
+
+## 23. FINAL OUTPUT CONTRACT (MANDATORY)
+
+At the end of each task, deliver this structured summary. Every item must be based on work actually performed. Do not omit failures or unverified work.
+
+```markdown
+# Documentation Engineering Report
+
+## 1. Repository and scope
+- Project:
+- Commit / branch audited:
+- Mode and exact source scope:
+- Languages, services and major dependencies:
+- Known exclusions and why:
+
+## 2. Work completed
+- Documentation files created (paths):
+- Documentation files updated (paths):
+- Existing docs superseded/reconciled (paths):
+- Architecture and diagrams created/verified:
+- Modules documented:
+- Features documented:
+- APIs/contracts/data stores/integrations documented:
+- Security/operations/testing references documented:
+
+## 3. Coverage accounting
+| Category | Discovered | Accounted for | Verified | Outstanding | Notes |
+|---|---:|---:|---:|---:|---|
+| First-party source files | | | | | |
+| Required module references | | | | | |
+| Implemented features | | | | | |
+| Public interfaces | | | | | |
+| Critical user/operational journeys | | | | | |
+
+## 4. Traceability and discrepancies
+- Spec/implementation mismatches:
+- Implemented but unspecced behavior:
+- Documented but nonexistent behavior corrected:
+- Requirements with missing tests/docs:
+- ADRs or open architecture decisions:
+
+## 5. Validation actually performed
+| Check or command | Scope/environment | PASS/FAIL/PARTIAL/NOT RUN/N/A | Evidence or reason |
+|---|---|---|---|
+| | | | |
+
+## 6. Risks, gaps and blockers
+- Critical:
+- High:
+- Medium/low:
+- Exact next microtasks to close gaps:
+
+## 7. Handoff
+- Documentation entry point:
+- Recommended reading order for a new engineer:
+- How to regenerate/update docs:
+- Review points for architecture/security/operations owners:
+- Documentation acceptance: PASS / BLOCKED
+- Why this result is justified:
+```
+
+### Acceptance determination
+
+`PASS` means all applicable gate conditions for the declared scope are met and supported by evidence. For a full `BASELINE_AUDIT`, a PASS requires a complete source-accounting inventory, all required references verified, critical paths covered, and no hidden material discrepancies.
+
+`BLOCKED` means significant gaps or unverified requirements remain. A blocked result may still contain substantial valuable documentation. Do not label it a failure of effort; simply identify what still needs to be done, what was safely completed, and why the task is not yet eligible for acceptance.
+
+---
+
+## 24. EXECUTE THE ASSIGNMENT NOW
+
+Proceed in this exact order unless repository-specific constraints justify an explained deviation:
+
+**Step 1.** State resolved inputs, repository revision and safe scope.  
+**Step 2.** Perform source and documentation reconnaissance.  
+**Step 3.** Build source, module, feature, interface and test inventories before declaring coverage.  
+**Step 4.** Trace architecture and the highest-risk cross-module workflows.  
+**Step 5.** Create a prioritized documentation plan and canonical navigation layout.  
+**Step 6.** Write detailed module and feature references grounded in source; cover all in-scope items in batches.  
+**Step 7.** Write/repair API, data, security, configuration, operation, test and developer documentation.  
+**Step 8.** Reconcile the engineering spec, phase/microtask backlog, source, tests and docs.  
+**Step 9.** Validate content, links, examples, schemas, diagrams, and reproducibility using available safe tools.  
+**Step 10.** Deliver the final evidence-based coverage report, gap register, and acceptance state.
+
+If source or tools are unavailable, complete the safe portion, preserve a checkpoint, and report exactly what remains unverified. Do not substitute speculation for inspection.
+
+**The project is not documented because the agent wrote many pages. It is documented only when the pages are accurate, complete for the declared scope, navigable, operationally useful, security-safe, traceable to real code, and continuously maintained.**
